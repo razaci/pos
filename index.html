@@ -567,6 +567,61 @@
       <span><b>ORIENT</b> EAST GATE</span>
       <span id="lastQuery"><b>LAST</b> —</span>
     </div>
+    <section id="buildGuide" class="lab" aria-labelledby="buildGuideTitle">
+      <h2 id="buildGuideTitle">Build prompt · Recreate Tabernacle OS</h2>
+      <p>Copy this complete specification into a coding AI to rebuild the application as a single HTML file.</p>
+      <button id="copyBuildPrompt" type="button">Copy prompt</button>
+      <span id="copyBuildStatus" role="status"></span>
+      <pre id="buildPrompt" style="white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.55">BUILD PROMPT · TABERNACLE OS / CAMP NETWORK
+
+Build a complete, standalone HTML application called Tabernacle OS: Camp Network. Return one runnable HTML file with inline CSS, SVG, and JavaScript. The simulator must work locally without a server or external dependencies. Use a dark green terminal, gold highlights, and a responsive single-column layout. Place controls and console beneath the architecture map and pin the live telemetry strip at the bottom. Reserve enough space to scroll to the last item.
+
+ARCHITECTURE AND INTERACTION
+Use Exodus 25–40 and Numbers 2 (KJV) as the architectural reference and Leviticus 16 for restricted access. Present computer functions and the Brain Map as creative interpretations. Build three interactive SVG views:
+• Full Camp: Judah, Issachar, Zebulun east. Reuben, Simeon, Gad south. Ephraim, Manasseh, Benjamin west. Dan, Asher, Naphtali north. Show the court and east gate at the center of the camp layout.
+• Inner Court: east gate, brazen altar, laver, Holy Place, lampstand on the south, showbread on the north, incense before the veil, and the Most Holy Place beyond it.
+• Core Only: Ark as CPU, Mercy Seat as instruction interface, cherubim as guardians, and the veil as the privilege boundary.
+Make map zones clickable and keyboard operable. Show their role in the architecture and simulator. Provide a command console with help, query, status, clear, viewport selection, trace, step, run, reset, cloud, fire, and recovery commands. Render user input safely as text.
+
+SIMULATOR
+Use a bounded dispatch queue with a maximum of 16 waiting packets. A packet has an ID, origin camp, operation, register, and optional value. Model twelve unsigned 12-bit showbread registers (0–4095). Start R01 at 12 and the rest at zero. READ returns a value, WRITE replaces it, and ADD increments it. The laver rejects out-of-range or noninteger payloads, the veil blocks direct access, and an arithmetic overflow raises a fault while preserving the register. Count accepted instructions at the CPU, including arithmetic that faults there. Cloud dispatches by camp priority east, south, west, north with stable arrival order within a camp. Fire dispatches in arrival order.
+
+Trace each request from its camp to the east gate, altar, laver, lampstand, incense, veil, Mercy Seat, Ark CPU, showbread register, and back to its origin camp. Highlight the current SVG zone, follow it across views, and display origin, operation, register, payload, hop, and result. Support immediate start, pause, single-step, and reset. Keep packet history and prevent overlapping timers.
+
+VIEWPORT TRIGGERS
+• Full Camp: Four-camp relay writes 100, 200, 300, and 400 to R01–R04. Camp register survey reads those registers from the same camps. Scan families starts the Brain Map tour.
+• Inner Court: Laver validation rejects 4096 and accepts 4095 on R05. Refresh showbread writes 1–12 to R01–R12. Incense request sends Dan&#x27;s READ of R06.
+• Core Only: Ark arithmetic writes 144 to R07, adds 6, and reads 150. Overflow interrupt writes 4095 to R08, attempts +1, then verifies 4095. Veil access check denies Dan&#x27;s direct request and allows a normal READ of R09.
+Start each trigger immediately. Show its scenario title and update the packet details at every hop. Reject an entire trigger if there is insufficient queue capacity.
+
+BRAIN MAP AND TELEMETRY
+Show all four camps, twelve tents, and thirty-six fictional family members in a responsive grid. Each record has a name, trait, contribution, and response under strain. Camp cards and tent cards highlight as the tour moves, each member&#x27;s profile expands in place, and checked members retain a checkmark. Provide per-tent inspection, a step control, pause and resume, progress, and inspection history. Explain the recovery analogy in a separate panel.
+
+Keep a fixed bottom strip with camp-by-camp members checked, tents visited, replies, and faults. Display total members checked, CPU cycles, queue depth, scheduler, and the latest trait or circuit event. Briefly highlight new activity and honor reduced-motion preferences.
+
+AUTO RUN AND ACCEPTANCE CHECKS
+One Auto Run button resets the circuit, visits all 36 members, then runs three diagnostic phases automatically. Cloud starts with Dan READ, Judah WRITE 144, and Reuben ADD 6 on R01 and must dispatch Judah, Reuben, Dan with results 144, 150, 150. Fire then dispatches Dan READ, Judah WRITE 72, and Reuben READ in arrival order with results 150, 72, 72. The fault phase writes 4095 to R02, attempts ADD 1, attempts direct access, attempts WRITE 4096, and reads back 4095. Check dispatch order, results, and per-phase CPU cycles. The full run should finish with 36 member checks, 11 packets, 8 replies, 3 expected faults, and 9 CPU cycles. Verify reset cancels active work and clears the run state.
+
+FAMILY DATA
+Each row contains the camp key, tribal tent name, and member records. Each member record contains name, trait, contribution, and response under strain.
+[
+      [&#x27;judah&#x27;,&#x27;Judah&#x27;,[[&#x27;Ari&#x27;,&#x27;Initiative&#x27;,&#x27;Names the first action&#x27;,&#x27;Can rush past a detail&#x27;],[&#x27;Mira&#x27;,&#x27;Courage&#x27;,&#x27;Starts a difficult task&#x27;,&#x27;Can dismiss uncertainty&#x27;],[&#x27;Eli&#x27;,&#x27;Judgment&#x27;,&#x27;Checks whether the action fits the goal&#x27;,&#x27;Can wait too long to decide&#x27;]]],
+      [&#x27;judah&#x27;,&#x27;Issachar&#x27;,[[&#x27;Tova&#x27;,&#x27;Timing&#x27;,&#x27;Chooses when to act&#x27;,&#x27;Can overplan&#x27;],[&#x27;Noam&#x27;,&#x27;Pattern recognition&#x27;,&#x27;Finds repeated signals&#x27;,&#x27;Can see patterns in noise&#x27;],[&#x27;Liora&#x27;,&#x27;Prioritization&#x27;,&#x27;Moves the most urgent task forward&#x27;,&#x27;Can overlook quiet needs&#x27;]]],
+      [&#x27;judah&#x27;,&#x27;Zebulun&#x27;,[[&#x27;Neri&#x27;,&#x27;Curiosity&#x27;,&#x27;Explores unfamiliar routes&#x27;,&#x27;Can wander off task&#x27;],[&#x27;Sela&#x27;,&#x27;Adaptability&#x27;,&#x27;Finds another route when blocked&#x27;,&#x27;Can switch too quickly&#x27;],[&#x27;Ilan&#x27;,&#x27;Coordination&#x27;,&#x27;Shares route changes with others&#x27;,&#x27;Can take on too much&#x27;]]],
+      [&#x27;reuben&#x27;,&#x27;Reuben&#x27;,[[&#x27;Ada&#x27;,&#x27;Awareness&#x27;,&#x27;Notices changes in feeling&#x27;,&#x27;Can fixate on one feeling&#x27;],[&#x27;Lev&#x27;,&#x27;Empathy&#x27;,&#x27;Considers another viewpoint&#x27;,&#x27;Can absorb others’ strain&#x27;],[&#x27;Mina&#x27;,&#x27;Self-regulation&#x27;,&#x27;Pauses before responding&#x27;,&#x27;Can hold back too long&#x27;]]],
+      [&#x27;reuben&#x27;,&#x27;Simeon&#x27;,[[&#x27;Shai&#x27;,&#x27;Listening&#x27;,&#x27;Repeats back key information&#x27;,&#x27;Can miss indirect cues&#x27;],[&#x27;Rina&#x27;,&#x27;Communication&#x27;,&#x27;Puts the need into words&#x27;,&#x27;Can overexplain&#x27;],[&#x27;Boaz&#x27;,&#x27;Assertiveness&#x27;,&#x27;States a clear boundary&#x27;,&#x27;Can respond too sharply&#x27;]]],
+      [&#x27;reuben&#x27;,&#x27;Gad&#x27;,[[&#x27;Ezra&#x27;,&#x27;Resolve&#x27;,&#x27;Keeps going after setbacks&#x27;,&#x27;Can persist with a poor plan&#x27;],[&#x27;Nava&#x27;,&#x27;Preparedness&#x27;,&#x27;Checks resources before action&#x27;,&#x27;Can prepare indefinitely&#x27;],[&#x27;Dara&#x27;,&#x27;Teamwork&#x27;,&#x27;Asks for help when needed&#x27;,&#x27;Can defer decisions&#x27;]]],
+      [&#x27;ephraim&#x27;,&#x27;Ephraim&#x27;,[[&#x27;Yael&#x27;,&#x27;Working memory&#x27;,&#x27;Holds the next few steps in mind&#x27;,&#x27;Can overload&#x27;],[&#x27;Oren&#x27;,&#x27;Recall&#x27;,&#x27;Retrieves a useful earlier lesson&#x27;,&#x27;Can mix up similar events&#x27;],[&#x27;Tamar&#x27;,&#x27;Rehearsal&#x27;,&#x27;Practices a step until familiar&#x27;,&#x27;Can repeat a stale routine&#x27;]]],
+      [&#x27;ephraim&#x27;,&#x27;Manasseh&#x27;,[[&#x27;Avi&#x27;,&#x27;Organization&#x27;,&#x27;Puts information in a retrievable order&#x27;,&#x27;Can over-sort&#x27;],[&#x27;Orli&#x27;,&#x27;Consolidation&#x27;,&#x27;Links new learning to prior knowledge&#x27;,&#x27;Can rely too heavily on old patterns&#x27;],[&#x27;Asa&#x27;,&#x27;Letting go&#x27;,&#x27;Retires outdated instructions&#x27;,&#x27;Can discard a useful detail&#x27;]]],
+      [&#x27;ephraim&#x27;,&#x27;Benjamin&#x27;,[[&#x27;Tal&#x27;,&#x27;Precision&#x27;,&#x27;Checks small details&#x27;,&#x27;Can lose sight of the whole task&#x27;],[&#x27;Eden&#x27;,&#x27;Persistence&#x27;,&#x27;Finishes the remaining work&#x27;,&#x27;Can miss a stopping cue&#x27;],[&#x27;Uri&#x27;,&#x27;Verification&#x27;,&#x27;Compares the result with the goal&#x27;,&#x27;Can recheck endlessly&#x27;]]],
+      [&#x27;dan&#x27;,&#x27;Dan&#x27;,[[&#x27;Keren&#x27;,&#x27;Vigilance&#x27;,&#x27;Scans for an unexpected change&#x27;,&#x27;Can stay on alert too long&#x27;],[&#x27;Gil&#x27;,&#x27;Evidence checking&#x27;,&#x27;Looks for a second clue&#x27;,&#x27;Can doubt a clear signal&#x27;],[&#x27;Amos&#x27;,&#x27;Risk assessment&#x27;,&#x27;Distinguishes urgent from routine&#x27;,&#x27;Can overestimate risk&#x27;]]],
+      [&#x27;dan&#x27;,&#x27;Asher&#x27;,[[&#x27;Hana&#x27;,&#x27;Restoration&#x27;,&#x27;Calls for a break when effort drops&#x27;,&#x27;Can stop too early&#x27;],[&#x27;Ziv&#x27;,&#x27;Encouragement&#x27;,&#x27;Recognizes progress&#x27;,&#x27;Can miss unresolved problems&#x27;],[&#x27;Aviva&#x27;,&#x27;Balance&#x27;,&#x27;Redistributes effort across tasks&#x27;,&#x27;Can spread effort too thin&#x27;]]],
+      [&#x27;dan&#x27;,&#x27;Naphtali&#x27;,[[&#x27;Yonah&#x27;,&#x27;Fast response&#x27;,&#x27;Flags a time-sensitive change&#x27;,&#x27;Can react before checking&#x27;],[&#x27;Keshet&#x27;,&#x27;Flexibility&#x27;,&#x27;Updates the plan with new evidence&#x27;,&#x27;Can change course unnecessarily&#x27;],[&#x27;Samir&#x27;,&#x27;Follow-through&#x27;,&#x27;Confirms the message reached its destination&#x27;,&#x27;Can keep monitoring after closure&#x27;]]]
+    ]
+
+Place this build prompt as selectable text below the entire program and include a Copy prompt button. Keep the live simulator functional while the prompt is being read.
+</pre>
+    </section>
   </div>
 
   <script>
@@ -1156,6 +1211,20 @@
       reportLab(message);
       startLab();
     });
+    document.getElementById('copyBuildPrompt').onclick=async()=>{
+      const prompt=document.getElementById('buildPrompt');
+      const status=document.getElementById('copyBuildStatus');
+      try{
+        await navigator.clipboard.writeText(prompt.textContent);
+        status.textContent='Prompt copied.';
+      }catch{
+        const selection=window.getSelection();
+        const range=document.createRange();
+        range.selectNodeContents(prompt);
+        selection.removeAllRanges();selection.addRange(range);
+        status.textContent='Prompt selected. Press Ctrl+C or Command+C to copy.';
+      }
+    };
   </script>
 </body>
 </html>
